@@ -8,6 +8,7 @@ from app.models.user import (
     UserCreate,
     UserUpdate,
 )
+from app.models.currency import CurrencyRead
 from app.cruds.user import (
     get_user_by_id,
     get_users,

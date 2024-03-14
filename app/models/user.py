@@ -4,6 +4,8 @@ from sqlmodel import SQLModel, Field, Relationship
 from passlib.context import CryptContext
 from decimal import Decimal
 
+from app.models.currency import Currency, CurrencyRead
+
 
 class UserBase(SQLModel):
     username: str
@@ -19,7 +21,7 @@ class UserBase(SQLModel):
 class User(UserBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     phone_number: Optional[str] = Field(default=None, unique=True)
-    currencies: list["Currency"] = Relationship(back_populates="user")
+    currencies: list[Currency] = Relationship(back_populates="user")
     is_superuser: bool = False
     hashed_password: str = Field(nullable=False)
 
@@ -45,7 +47,7 @@ class UserCreate(UserBase):
 
 class UserRead(UserBase):
     id: int
-    currencies: list["CurrencyRead"] = []
+    currencies: list[CurrencyRead] = []
 
 
 class UserUpdate(SQLModel):
